@@ -1,0 +1,13 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Linear+B&family=Poppins&display=swap');
+
+
+table, th, td{
+    border: 2px solid purple;
+    border-collapse: collapse;
+    background-color: black;
+    color: white;
+    font-size: 2vw;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
