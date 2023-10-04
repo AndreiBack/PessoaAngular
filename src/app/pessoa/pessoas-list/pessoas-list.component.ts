@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Pessoa } from './pessoa';
+import { Pessoa } from '../pessoa';
 @Component({
   selector: 'app-pessoa',
-  templateUrl: './pessoa.component.html',
-  styleUrls: ['./pessoa.component.css']
+  templateUrl: './pessoas-list.component.html',
+  styleUrls: ['./pessoas-list.component.css']
 })
-export class PessoaComponent {
+export class PessoasListComponent {
   lista:Pessoa[] = [];
 
   constructor(){
