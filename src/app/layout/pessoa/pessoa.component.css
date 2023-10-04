@@ -11,3 +11,13 @@ table, th, td{
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
 }
+p{
+  font-size: 2vw;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+.tudo{
+  display: flex;
+  flex-direction: row;
+  gap: 25vw;
+}

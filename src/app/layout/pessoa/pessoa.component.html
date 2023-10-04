@@ -1,10 +1,31 @@
+<div class="tudo">
+    <div>
+<p>Pessoas mais de 30 anos</p>
 <table> 
     <tr>
         <th>Nome</th>
         <th>Idade</th>
     </tr>
+    
     <tr *ngFor="let pessoa of lista">
         <td scope="col"*ngIf="pessoa.idade>30">{{pessoa.nome}}</td>
         <td scope="col"*ngIf="pessoa.idade>30">{{pessoa.idade}}</td>
     </tr>
+
 </table>
+</div>
+<div>
+<p>Todas as pessoas</p>
+<table> 
+    <tr>
+        <th>Nome</th>
+        <th>Idade</th>
+    </tr>
+
+<tr *ngFor="let pessoa of lista">
+    <td scope="col">{{pessoa.nome}}</td>
+    <td scope="col">{{pessoa.idade}}</td>
+</tr>
+</table>
+</div>
+</div>
