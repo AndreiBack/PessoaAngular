@@ -1,0 +1,16 @@
+<div class="tudo">
+    <div>
+<p>Carros</p>
+<table> 
+    <tr>
+        <th>Nome</th>
+        <th>ano</th>
+    </tr>
+    
+    <tr *ngFor="let carro of lista">
+        <td scope="col" >{{carro.nome}}</td>
+        <td scope="col" >{{carro.ano}}</td>
+    </tr>
+
+</table>
+</div>

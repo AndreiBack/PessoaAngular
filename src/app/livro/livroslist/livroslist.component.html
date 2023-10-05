@@ -1,0 +1,17 @@
+
+<div class="tudo">
+    <div>
+<p>Listagem de livros</p>
+<table> 
+    <tr>
+        <th>Titulo</th>
+        <th>Autor</th>
+    </tr>
+    
+    <tr *ngFor="let livro of lista">
+        <td scope="col">{{livro.titulo}}</td>
+        <td scope="col">{{livro.autor}}</td>
+    </tr>
+
+</table>
+</div>
