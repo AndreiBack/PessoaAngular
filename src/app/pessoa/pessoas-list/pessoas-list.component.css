@@ -5,7 +5,7 @@
 table, th, td{
     border: 2px solid purple;
     border-collapse: collapse;
-    background-color: black;
+    background-color: rgb(30, 30, 32);
     color: white;
     font-size: 2vw;
     font-weight: 500;
@@ -21,4 +21,5 @@ p{
   flex-direction: row;
   justify-content: center;
   gap: 25vw;
+  text-align: center;
 }
