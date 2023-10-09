@@ -1,10 +1,13 @@
 <div class="cadastro">
-
     <h1>Modelo:</h1>
-    <input type="text" [(ngModel)]="carro.nome" />
-    
-    <h1>Ano:</h1>
-    <input type="number" [(ngModel)]="carro.ano" />
-    
-    <button (click)="salvar()">Salvar</button>
-    </div>
+    <input type="text" [(ngModel)]="carroEditavel.nome" />
+  
+    <h1>Idade:</h1>
+    <input type="number" [(ngModel)]="carroEditavel.ano" />
+  <br><br>
+    <button (click)="salvar()">
+      {{ carroEditavel.id ? 'Editar' : 'Cadastrar' }}
+    </button>
+    <button *ngIf="carroEditavel.id" (click)="limpar()">Cancelar</button>
+  </div>
+  

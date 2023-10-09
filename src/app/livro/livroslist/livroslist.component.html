@@ -6,18 +6,22 @@
     <tr>
         <th>Titulo</th>
         <th>Autor</th>
+        <th> <button class="btn btn-outline-primary" (click)="abrirModal(abc)" >+</button> </th> 
     </tr>
     
     <tr *ngFor="let livro of lista">
         <td scope="col">{{livro.titulo}}</td>
         <td scope="col">{{livro.autor}}</td>
+        <td >
+            <button class="btn btn-outline-primary" (click)="abrirModalEditar(editar, livro)">🖋️</button>
+          </td>
     </tr>
 
 </table>
 </div>
 
 </div>
-<button (click)="abrirModal(abc)" >Novo livro</button>
+
 <ng-template #abc let-modal>
 	<div class="modal-header">
 		<h4 class="modal-title">Modal title</h4>
@@ -25,10 +29,25 @@
 	</div>
 	<div class="modal-body">
 		
-        <app-livrosdetails (retorno)="addNaLista($event)" ></app-livrosdetails>
+        <app-livrosdetails (salvarLivro)="addNaLista($event)" ></app-livrosdetails>
             
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 	</div>
 </ng-template>
+
+<ng-template #editar let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Editar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-livrosdetails (salvarLivro)="edit($event)" ></app-livrosdetails>                                                       
+        
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

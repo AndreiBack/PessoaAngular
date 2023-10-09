@@ -9,8 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./carroslist.component.css']
 })
 export class CarroslistComponent {
+  
   lista:Carro[] = [];
-
+  carroEditavel: Carro = new Carro();
   modalService = inject(NgbModal);
 
   constructor(){
@@ -41,6 +42,21 @@ export class CarroslistComponent {
     this.modalService.dismissAll();
   }
 
+  abrirModalEditar(editar:any, carro:Carro){
+    this.carroEditavel = carro;
+    this.modalService.open( editar, { size: 'lg' });
+  }
+
+
+
+  edit(carroEditado: Carro) {
+    const index = this.lista.findIndex(p => p === this.carroEditavel);
+    if (index !== -1) {
+      this.lista[index] = carroEditado;
+      this.carroEditavel = new Carro(); 
+    }
+    this.modalService.dismissAll(); 
+  }
 
 }
 

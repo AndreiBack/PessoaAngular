@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Pessoa } from '../pessoa';
 
 @Component({

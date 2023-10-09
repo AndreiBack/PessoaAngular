@@ -9,7 +9,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LivroslistComponent {
   lista:Livro[] = [];
+  livroEditavel: Livro = new Livro();
+
   modalService = inject(NgbModal);
+  
 
   constructor(){
 
@@ -37,6 +40,20 @@ export class LivroslistComponent {
   addNaLista(livro: Livro){
     this.lista.push(livro);
     this.modalService.dismissAll();
+  }
+  abrirModalEditar(editar:any, livro:Livro){
+    this.livroEditavel = livro;
+    this.modalService.open( editar, { size: 'lg' });
+  }
+
+
+  edit(livroEditado: Livro) {
+    const index = this.lista.findIndex(p => p === this.livroEditavel);
+    if (index !== -1) {
+      this.lista[index] = livroEditado;
+      this.livroEditavel = new Livro(); 
+    }
+    this.modalService.dismissAll(); 
   }
 
 

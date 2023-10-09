@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Carro } from '../carro';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,22 +8,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./carrosdetails.component.css']
 })
 export class CarrosdetailsComponent {
-  roteador = inject(ActivatedRoute);
-  carro: Carro = new Carro();
+  
+  @Input() carroEditavel: Carro = new Carro(); 
 
-  @Output() retorno = new EventEmitter<Carro>();
+  @Output() salvarCarro = new EventEmitter<Carro>();
 
+  constructor() {}
 
-  constructor(){
-    let id = this.roteador.snapshot.paramMap.get('id');
-    console.log(id);
+  salvar() {
+    this.salvarCarro.emit(this.carroEditavel); 
+    this.carroEditavel = new Carro();
   }
 
-
-  salvar(){
-    this.retorno.emit(this.carro);
+  limpar() {
+    this.carroEditavel = new Carro(); 
   }
-
 }
-
-

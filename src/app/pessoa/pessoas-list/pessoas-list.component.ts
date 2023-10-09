@@ -68,16 +68,17 @@ export class PessoasListComponent {
   abrirModal(abc: any){
     this.modalService.open(abc, { size: 'lg' });
   }
+  addNaLista(pessoa: Pessoa){
+    this.lista.push(pessoa);
+    this.modalService.dismissAll();
+  }
+
 
   abrirModalEditar(editar:any, pessoa:Pessoa){
     this.pessoaEditavel = pessoa;
     this.modalService.open( editar, { size: 'lg' });
   }
 
-  addNaLista(pessoa: Pessoa){
-    this.lista.push(pessoa);
-    this.modalService.dismissAll();
-  }
 
 
   edit(pessoaEditada: Pessoa) {

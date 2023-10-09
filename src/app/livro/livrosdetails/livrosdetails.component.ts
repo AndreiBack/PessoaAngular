@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Livro } from '../livro';
 
 @Component({
@@ -8,20 +7,18 @@ import { Livro } from '../livro';
   styleUrls: ['./livrosdetails.component.css']
 })
 export class LivrosdetailsComponent {
-  roteador = inject(ActivatedRoute);
-  livro: Livro = new Livro();
+  @Input() livroEditavel: Livro = new Livro(); 
 
-  @Output() retorno = new EventEmitter<Livro>();
+  @Output() salvarLivro = new EventEmitter<Livro>();
 
+  constructor() {}
 
-  constructor(){
-    let id = this.roteador.snapshot.paramMap.get('id');
-    console.log(id);
+  salvar() {
+    this.salvarLivro.emit(this.livroEditavel); 
+    this.livroEditavel = new Livro();
   }
 
-
-  salvar(){
-    //banco de dados... back
-    this.retorno.emit(this.livro);
+  limpar() {
+    this.livroEditavel = new Livro(); 
   }
 }

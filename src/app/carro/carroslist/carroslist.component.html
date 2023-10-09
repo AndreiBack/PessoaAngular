@@ -5,17 +5,18 @@
     <tr>
         <th>Modelo</th>
         <th>Ano</th>
+        <th> <button class="btn btn-outline-primary" (click)="abrirModal(abc)" >+</button> </th> 
     </tr>
     
     <tr *ngFor="let carro of lista">
         <td scope="col" >{{carro.nome}}</td>
         <td scope="col" >{{carro.ano}}</td>
+        <button class="btn btn-outline-primary" (click)="abrirModalEditar(editar, carro)">🖋️</button>
     </tr>
 
 </table>
 </div>
 </div>  
-<button (click)="abrirModal(abc)" >Novo carro</button>
 
 <ng-template #abc let-modal>
 	<div class="modal-header">
@@ -24,10 +25,25 @@
 	</div>
 	<div class="modal-body">
 		
-        <app-carrosdetails (retorno)="addNaLista($event)" ></app-carrosdetails>
+        <app-carrosdetails (salvarCarro)="addNaLista($event)" ></app-carrosdetails>
             
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 	</div>
 </ng-template>
+
+<ng-template #editar let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Editar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-carrosdetails (salvarCarro)="edit($event)" ></app-carrosdetails>
+        
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
