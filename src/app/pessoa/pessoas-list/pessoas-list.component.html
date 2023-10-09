@@ -1,49 +1,71 @@
 <div class="tudo">
     <div>
+        <p>Todas as Pessoas</p>
+        <table>
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th> <button class="btn btn-outline-primary" (click)="abrirModal(abc)" >+</button> </th> 
+            </tr>
+            <tr *ngFor="let pessoa of lista">
+              <td>{{pessoa.nome}}</td>
+              <td>{{pessoa.idade}}</td>
+              <td>
+                <button class="btn btn-outline-primary" (click)="abrirModalEditar(editar, pessoa)">🖋️</button>
+              </td>
+            </tr>
+          </table>
+</div>
+<div>     
 <p>Pessoas mais de 30 anos</p>
-<table> 
+<table>
     <tr>
-        <th>Nome</th>
-        <th>Idade</th>
+      <th>Nome</th>
+      <th>Idade</th>
+      <th> <button class="btn btn-outline-primary" (click)="abrirModal(abc)" >+</button> </th>
     </tr>
-    
     <tr *ngFor="let pessoa of lista">
-        <td scope="col"*ngIf="pessoa.idade>30">{{pessoa.nome}}</td>
-        <td scope="col"*ngIf="pessoa.idade>30">{{pessoa.idade}}</td>
+      <td *ngIf="pessoa.idade > 30">{{pessoa.nome}}</td>
+      <td *ngIf="pessoa.idade > 30">{{pessoa.idade}}</td>
+      <td *ngIf="pessoa.idade > 30">
+        <button class="btn btn-outline-primary" (click)="abrirModalEditar(editar, pessoa)">🖋️</button>
+      </td>
     </tr>
+  </table>
+  
+ </div>
 
-</table>
-</div>
-<div>
-<p>Todas as pessoas</p>
-<table> 
-    <tr>
-        <th>Nome</th>
-        <th>Idade</th>
-    </tr>
-
-<tr *ngFor="let pessoa of lista">
-    <td scope="col">{{pessoa.nome}}</td>
-    <td scope="col">{{pessoa.idade}}</td>
-</tr>
-</table>
-</div>
-</div>  
-<button (click)="abrirModal(abc)" >Nova pessoa</button>
- 
+ </div>
 
 
 <ng-template #abc let-modal>
 	<div class="modal-header">
-		<h4 class="modal-title">Modal title</h4>
+		<h4 class="modal-title">Cadastrar</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
 		
-        <app-pessoasdetails (retorno)="addNaLista($event)" ></app-pessoasdetails>
+        <app-pessoasdetails (salvarPessoa)="addNaLista($event)" ></app-pessoasdetails>
             
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 	</div>
 </ng-template>
+
+
+<ng-template #editar let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Editar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-pessoasdetails (salvarPessoa)="edit($event)" ></app-pessoasdetails>
+        
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+  

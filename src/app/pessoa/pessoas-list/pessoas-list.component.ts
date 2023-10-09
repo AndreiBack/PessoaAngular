@@ -9,6 +9,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PessoasListComponent {
   lista:Pessoa[] = [];
+  pessoaEditavel: Pessoa = new Pessoa();
+
   modalService = inject(NgbModal);
 
   constructor(){
@@ -67,9 +69,24 @@ export class PessoasListComponent {
     this.modalService.open(abc, { size: 'lg' });
   }
 
+  abrirModalEditar(editar:any, pessoa:Pessoa){
+    this.pessoaEditavel = pessoa;
+    this.modalService.open( editar, { size: 'lg' });
+  }
+
   addNaLista(pessoa: Pessoa){
     this.lista.push(pessoa);
     this.modalService.dismissAll();
+  }
+
+
+  edit(pessoaEditada: Pessoa) {
+    const index = this.lista.findIndex(p => p === this.pessoaEditavel);
+    if (index !== -1) {
+      this.lista[index] = pessoaEditada;
+      this.pessoaEditavel = new Pessoa(); 
+    }
+    this.modalService.dismissAll(); 
   }
 
 }

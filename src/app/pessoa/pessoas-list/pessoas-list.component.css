@@ -11,6 +11,7 @@ table, th, td{
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
 }
+
 p{
   font-size: 2vw;
   font-weight: 500;
@@ -23,6 +24,7 @@ p{
   gap: 25vw;
   text-align: center;
 }
+
 div.modal-header,div.modal-body,div.modal-footer{
   background-color: rgb(30, 30, 32);
 }
