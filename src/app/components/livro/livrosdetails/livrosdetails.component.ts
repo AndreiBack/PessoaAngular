@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Livro } from '../../../model/livro';
+import { LivroService } from 'src/app/services/livro.service';
 
 @Component({
   selector: 'app-livrosdetails',
@@ -7,18 +8,43 @@ import { Livro } from '../../../model/livro';
   styleUrls: ['./livrosdetails.component.css']
 })
 export class LivrosdetailsComponent {
-  @Input() livroEditavel: Livro = new Livro(); 
+  @Input() livro: Livro = new Livro();
+  @Output() retorno = new EventEmitter<Livro>();
 
-  @Output() salvarLivro = new EventEmitter<Livro>();
+  livroService = inject(LivroService);
+  isEdit = false; 
 
-  constructor() {}
+  constructor() {
+
+  }
+
+  ngOnInit() {
+    this.isEdit = this.livro.id > 0; 
+  }
 
   salvar() {
-    this.salvarLivro.emit(this.livroEditavel); 
-    this.livroEditavel = new Livro();
+    if (this.isEdit) {
+      // Modo de edição
+      this.livroService.update(this.livro).subscribe({
+        next: livro => {
+          this.retorno.emit(livro);
+        },
+        error: erro => {
+          alert('Deu erro! Observe o erro no console!');
+          console.error(erro);
+        }
+      });
+    } else {
+      this.livroService.save(this.livro).subscribe({
+        next: livro => {
+          this.retorno.emit(livro);
+        },
+        error: erro => {
+          alert('Deu erro! Observe o erro no console!');
+          console.error(erro);
+        }
+      });
+    }
   }
 
-  limpar() {
-    this.livroEditavel = new Livro(); 
-  }
 }

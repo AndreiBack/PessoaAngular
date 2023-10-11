@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Livro } from '../../../model/livro';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LivroService } from 'src/app/services/livro.service';
 
 @Component({
   selector: 'app-livroslist',
@@ -8,52 +9,72 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./livroslist.component.css']
 })
 export class LivroslistComponent {
-  lista:Livro[] = [];
-  livroEditavel: Livro = new Livro();
+  lista: Livro[] = [];
+
+  LivroSelecionadoParaEdicao: Livro = new Livro();
+  indiceSelecionadoParaEdicao!: number;
 
   modalService = inject(NgbModal);
+  livroService = inject(LivroService);
+
+  constructor() {
+
+    this.listAll();
+
+
+  }
+
+
+  listAll() {
+
+    this.livroService.listAll().subscribe({
+      next: lista => { 
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+
+  }
+
+  exemploErro() {
+
+    this.livroService.exemploErro().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+
+  }
+
+
+  adicionar(modal: any) {
+    this.LivroSelecionadoParaEdicao = new Livro();
+
+    this.modalService.open(modal, { size: 'sm' });
+  }
+
+  editar(modal: any, livro: Livro, indice: number) {
+    this.LivroSelecionadoParaEdicao = Object.assign({}, livro); 
+    this.indiceSelecionadoParaEdicao = indice;
+
+    this.modalService.open(modal, { size: 'sm' });
+  }
+
+  addOuEditarLivro(livro: Livro) {
+
+    this.listAll();
+
   
 
-  constructor(){
-
-    let livro1:Livro= new Livro();
-    livro1.titulo = "Dracula";
-    livro1.autor = "Bram Stoker";
-
-    let livro2:Livro= new Livro();
-    livro2.titulo = "Carmilla";
-    livro2.autor = "Sheridan Le Fanu";
-
-    let livro3:Livro= new Livro();
-    livro3.titulo = "O Vampiro";
-    livro3.autor = "John William Polidori";
-
-    this.lista.push(livro1);
-    this.lista.push(livro2);
-    this.lista.push(livro3);
-  }
-
-  abrirModal(abc: any){
-    this.modalService.open(abc, { size: 'lg' });
-  }
-
-  addNaLista(livro: Livro){
-    this.lista.push(livro);
     this.modalService.dismissAll();
-  }
-  abrirModalEditar(editar:any, livro:Livro){
-    this.livroEditavel = livro;
-    this.modalService.open( editar, { size: 'lg' });
-  }
 
-
-  edit(livroEditado: Livro) {
-    const index = this.lista.findIndex(p => p === this.livroEditavel);
-    if (index !== -1) {
-      this.lista[index] = livroEditado;
-      this.livroEditavel = new Livro(); 
-    }
-    this.modalService.dismissAll(); 
   }
 
 

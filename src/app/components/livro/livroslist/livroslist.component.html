@@ -6,14 +6,14 @@
     <tr>
         <th>Titulo</th>
         <th>Autor</th>
-        <th> <button class="btn btn-outline-primary" (click)="abrirModal(abc)" >+</button> </th> 
+        <th> <button class="btn btn-outline-primary" (click)="adicionar(modal1)" >+</button> </th> 
     </tr>
     
-    <tr *ngFor="let livro of lista">
+    <tr *ngFor="let livro of lista; let i = index">
         <td scope="col">{{livro.titulo}}</td>
         <td scope="col">{{livro.autor}}</td>
         <td >
-            <button class="btn btn-outline-primary" (click)="abrirModalEditar(editar, livro)">🖋️</button>
+            <button class="btn btn-outline-primary" (click)="editar(modal1, livro, i)">🖋️</button>
           </td>
     </tr>
 
@@ -22,32 +22,17 @@
 
 </div>
 
-<ng-template #abc let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title">Modal title</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		
-        <app-livrosdetails (salvarLivro)="addNaLista($event)" ></app-livrosdetails>
-            
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-	</div>
-</ng-template>
-
-<ng-template #editar let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Editar</h4>
+<ng-template #modal1 let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-
-        <app-livrosdetails (salvarLivro)="edit($event)" ></app-livrosdetails>                                                       
-        
-    </div>
-    <div class="modal-footer">
+  </div>
+  <div class="modal-body">
+     
+    <app-livrosdetails [livro]="LivroSelecionadoParaEdicao" (retorno)="addOuEditarLivro($event)" ></app-livrosdetails>
+      
+  </div>
+  <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
+  </div>
+</ng-template>
