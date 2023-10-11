@@ -62,7 +62,7 @@ export class PessoaslistComponent {
   }
 
   editar(modal: any, pessoa: Pessoa, indice: number) {
-    this.pessoaSelecionadaParaEdicao = Object.assign({}, pessoa); //clonando o objeto se for edição... pra não mexer diretamente na referência da lista
+    this.pessoaSelecionadaParaEdicao = Object.assign({}, pessoa); 
     this.indiceSelecionadoParaEdicao = indice;
 
     this.modalService.open(modal, { size: 'sm' });

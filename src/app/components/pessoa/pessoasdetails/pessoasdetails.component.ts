@@ -13,27 +13,39 @@ export class PessoasdetailsComponent {
   @Output() retorno = new EventEmitter<Pessoa>();
 
   pessoaService = inject(PessoaService);
-
+  isEdit = false; 
 
   constructor() {
 
   }
 
+  ngOnInit() {
+    this.isEdit = this.pessoa.id > 0; 
+  }
+
   salvar() {
-   
-
-    this.pessoaService.save(this.pessoa).subscribe({
-      next: pessoa => { // QUANDO DÁ CERTO
-        this.retorno.emit(pessoa);
-      },
-      error: erro => { // QUANDO DÁ ERRO
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
-        console.error(erro);
-      }
-    });
-
-
-
+    if (this.isEdit) {
+      // Modo de edição
+      this.pessoaService.update(this.pessoa).subscribe({
+        next: pessoa => {
+          this.retorno.emit(pessoa);
+        },
+        error: erro => {
+          alert('Deu erro! Observe o erro no console!');
+          console.error(erro);
+        }
+      });
+    } else {
+      this.pessoaService.save(this.pessoa).subscribe({
+        next: pessoa => {
+          this.retorno.emit(pessoa);
+        },
+        error: erro => {
+          alert('Deu erro! Observe o erro no console!');
+          console.error(erro);
+        }
+      });
+    }
   }
 
 }
