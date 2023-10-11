@@ -13,7 +13,7 @@
               <td>{{pessoa.idade}}</td>
               <td>
                 <button class="btn btn-outline-primary" (click)="editar(modal1, pessoa, i)">🖋️</button>
-                <button class="btn btn-outline-primary" (click)="excluir(pessoa.id)">🗑️</button>
+                <button class="btn btn-outline-danger" (click)="excluir(pessoa.id)">🗑️</button>
               </td>
             </tr>
           </table>
@@ -31,6 +31,7 @@
       <td *ngIf="pessoa.idade > 30">{{pessoa.idade}}</td>
       <td *ngIf="pessoa.idade > 30">
         <button class="btn btn-outline-primary" (click)="editar(modal1, pessoa, i)">🖋️</button>
+        <button class="btn btn-outline-danger" (click)="excluir(pessoa.id)">🗑️</button>
       </td>
     </tr>
   </table>
