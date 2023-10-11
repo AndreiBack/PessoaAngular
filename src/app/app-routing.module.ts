@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './layout/index/index.component';
-import { LoginComponent } from './sistema/login/login.component';
-import { PessoasListComponent } from './pessoa/pessoas-list/pessoas-list.component';
-import { PessoasdetailsComponent } from './pessoa/pessoasdetails/pessoasdetails.component';
-import { CarroslistComponent } from './carro/carroslist/carroslist.component';
-import { LivroslistComponent } from './livro/livroslist/livroslist.component';
-import { LivrosdetailsComponent } from './livro/livrosdetails/livrosdetails.component';
-import { CarrosdetailsComponent } from './carro/carrosdetails/carrosdetails.component';
+import { IndexComponent } from './components/layout/index/index.component';
+import { LoginComponent } from './components/sistema/login/login.component';
+import { PessoaslistComponent } from './components/pessoa/pessoaslist/pessoas-list.component';
+import { PessoasdetailsComponent } from './components/pessoa/pessoasdetails/pessoasdetails.component';
+import { CarroslistComponent } from './components/carro/carroslist/carroslist.component';
+import { LivroslistComponent } from './components/livro/livroslist/livroslist.component';
+import { LivrosdetailsComponent } from './components/livro/livrosdetails/livrosdetails.component';
+import { CarrosdetailsComponent } from './components/carro/carrosdetails/carrosdetails.component';
 
 const routes: Routes = [
   {path:"", component:IndexComponent},
   {path:"login", component:LoginComponent},
   {path:"admin", component: IndexComponent, children: [
-    {path:"pessoas", component: PessoasListComponent},
+    {path:"pessoas", component: PessoaslistComponent},
     { path: "pessoas/novo", component: PessoasdetailsComponent},
     { path: "pessoas/editar/:id", component: PessoasdetailsComponent},
 

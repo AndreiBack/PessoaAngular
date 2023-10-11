@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { Livro } from '../livro';
+import { Livro } from '../../../model/livro';
 
 @Component({
   selector: 'app-livrosdetails',

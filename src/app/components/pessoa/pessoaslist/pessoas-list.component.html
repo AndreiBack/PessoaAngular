@@ -1,0 +1,55 @@
+
+<div class="tudo">
+    <div>
+     
+        <p>Todas as Pessoas</p>
+        <table>
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th> <button class="btn btn-outline-primary" (click)="adicionar(modal1)" >+</button> </th> 
+              <tr *ngFor="let pessoa of lista; let i = index">
+              <td>{{pessoa.nome}}</td>
+              <td>{{pessoa.idade}}</td>
+              <td>
+                <button class="btn btn-outline-primary" (click)="editar(modal1, pessoa, i)">🖋️</button>
+              </td>
+            </tr>
+          </table>
+</div>
+<div>     
+<p>Pessoas mais de 30 anos</p>
+<table>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+      <th> <button class="btn btn-outline-primary" (click)="adicionar(modal1)" >+</button> </th>
+    </tr>
+    <tr *ngFor="let pessoa of lista; let i = index">
+      <td *ngIf="pessoa.idade > 30">{{pessoa.nome}}</td>
+      <td *ngIf="pessoa.idade > 30">{{pessoa.idade}}</td>
+      <td *ngIf="pessoa.idade > 30">
+        <button class="btn btn-outline-primary" (click)="editar(modal1, pessoa, i)">🖋️</button>
+      </td>
+    </tr>
+  </table>
+  
+ </div>
+
+ </div>
+
+
+ <ng-template #modal1 let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+     
+    <app-pessoasdetails [pessoa]="pessoaSelecionadaParaEdicao" (retorno)="addOuEditarPessoa($event)" ></app-pessoasdetails>
+      
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

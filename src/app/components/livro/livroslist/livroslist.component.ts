@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Livro } from '../livro';
+import { Livro } from '../../../model/livro';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
