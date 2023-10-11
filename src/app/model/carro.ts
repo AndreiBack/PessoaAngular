@@ -1,5 +1,5 @@
 export class Carro {
     id!: number;
-    nome!: String;
+    modelo!: String;
     ano!: number;
 }

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Carro } from '../../../model/carro';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CarroService } from 'src/app/services/carro.service';
 
 
 @Component({
@@ -10,53 +11,83 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CarroslistComponent {
   
-  lista:Carro[] = [];
-  carroEditavel: Carro = new Carro();
+
+  lista: Carro[] = [];
+
+  carroSelecionadoParaEdicao: Carro = new Carro();
+  indiceSelecionadoParaEdicao!: number;
+
   modalService = inject(NgbModal);
+  carroService = inject(CarroService);
 
-  constructor(){
+  constructor() {
 
-    let carro1:Carro = new Carro();
-    carro1.nome = "CarroDoBen10";
-    carro1.ano = 2010;
+    this.listAll();
 
-    let carro2:Carro = new Carro();
-    carro2.nome = "Corola";
-    carro2.ano = 1990;
-
-    let carro3:Carro = new Carro();
-    carro3.nome = "Impala";
-    carro3.ano = 1967;
-
-    this.lista.push(carro1);
-    this.lista.push(carro2);
-    this.lista.push(carro3);
   }
 
-  abrirModal(abc: any){
-    this.modalService.open(abc, { size: 'lg' });
+
+  listAll() {
+
+    this.carroService.listAll().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+
   }
 
-  addNaLista(carro: Carro){
-    this.lista.push(carro);
+  exemploErro() {
+
+    this.carroService.exemploErro().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+
+  }
+
+
+  adicionar(modal: any) {
+    this.carroSelecionadoParaEdicao = new Carro();
+
+    this.modalService.open(modal, { size: 'sm' });
+  }
+
+  editar(modal: any, carro: Carro, indice: number) {
+    this.carroSelecionadoParaEdicao = Object.assign({}, carro); 
+    this.indiceSelecionadoParaEdicao = indice;
+
+    this.modalService.open(modal, { size: 'sm' });
+  }
+
+  addOuEditarCarro(carro: Carro) {
+
+    this.listAll();
     this.modalService.dismissAll();
+
   }
-
-  abrirModalEditar(editar:any, carro:Carro){
-    this.carroEditavel = carro;
-    this.modalService.open( editar, { size: 'lg' });
-  }
-
-
-
-  edit(carroEditado: Carro) {
-    const index = this.lista.findIndex(p => p === this.carroEditavel);
-    if (index !== -1) {
-      this.lista[index] = carroEditado;
-      this.carroEditavel = new Carro(); 
+  excluir(id: number) {
+    if (confirm('Deseja realmente excluir este carro?')) {
+      this.carroService.delete(id).subscribe({
+        next: () => {
+          this.lista = this.lista.filter(carro => carro.id !== id);
+        },
+        error: erro => {
+          alert('Ocorreu um erro ao excluir o carro. Confira o console para mais informações.');
+          console.error(erro);
+        }
+      });
     }
-    this.modalService.dismissAll(); 
   }
+  
 
 }
-

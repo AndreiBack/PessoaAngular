@@ -76,6 +76,20 @@ export class LivroslistComponent {
     this.modalService.dismissAll();
 
   }
+  excluir(id: number) {
+    if (confirm('Deseja realmente excluir este livro?')) {
+      this.livroService.delete(id).subscribe({
+        next: () => {
+          this.lista = this.lista.filter(livro => livro.id !== id);
+        },
+        error: erro => {
+          alert('Ocorreu um erro ao excluir o livro. Confira o console para mais informações.');
+          console.error(erro);
+        }
+      });
+    }
+  }
+  
 
 
 }

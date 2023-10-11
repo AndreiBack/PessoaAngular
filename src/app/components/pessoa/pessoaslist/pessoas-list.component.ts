@@ -71,19 +71,22 @@ export class PessoaslistComponent {
   addOuEditarPessoa(pessoa: Pessoa) {
 
     this.listAll();
-
-    /*
-
-    if (this.pessoaSelecionadaParaEdicao.id > 0) { //MODO EDITAR
-      this.lista[this.indiceSelecionadoParaEdicao] = pessoa;
-    } else {
-      pessoa.id = 99;
-      this.lista.push(pessoa);
-    }
-    */
-
     this.modalService.dismissAll();
 
   }
+  excluir(id: number) {
+    if (confirm('Deseja realmente excluir esta pessoa?')) {
+      this.pessoaService.delete(id).subscribe({
+        next: () => {
+          this.lista = this.lista.filter(pessoa => pessoa.id !== id);
+        },
+        error: erro => {
+          alert('Ocorreu um erro ao excluir a pessoa. Confira o console para mais informações.');
+          console.error(erro);
+        }
+      });
+    }
+  }
+  
 
 }
